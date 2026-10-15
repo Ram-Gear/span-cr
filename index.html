@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Span CR – Chordal to Span &amp; Comparator Reading | Ram-Gear Manufacturing</title>
+<link rel="icon" type="image/svg+xml" href="img/icon.svg"><link rel="icon" type="image/png" href="img/icon-64.png">
+<link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header class="site-header">
+  <div class="brand"><img class="app-icon" src="img/icon.svg" width="46" height="46" alt="Span CR icon">
+    <div><div class="company">Ram-Gear Manufacturing Inc.</div>
+    <h1>Span CR <span class="sub">Chordal Addendum &amp; Thickness → Span &amp; CR</span></h1></div></div>
+  <nav class="header-actions">
+    <button type="button" class="btn" onclick="window.print()">Print</button>
+    <a class="btn btn-ghost" href="help.html">Practice</a>
+    <a class="btn btn-ghost" id="btnHelp" href="https://grok.com/?q=I%27m%20using%20Ram-Gear%27s%20Span%20CR%20app%2C%20a%20browser%20rebuild%20of%20Roger%20Blake%27s%20spreadsheet%20that%20converts%20chordal%20addendum%20and%20chordal%20thickness%20%28B%26S%20gear%20tooth%20caliper%20readings%29%20to%20span%20measurement%20over%20N%20teeth%20and%20comparator%20reading%20%28CR%29%20for%20stub%20tooth%20herringbone%20gears%20or%20pinions%20with%20basic%20addendum%200.8/DPT.%20Can%20you%20give%20me%20pointers%20on%20how%20to%20use%20it%3F" target="_blank" rel="noopener" title="Ask Grok how to use Span CR (opens in a new tab)">Help</a>
+  </nav>
+</header>
+<main class="layout">
+<section class="card" aria-labelledby="inT">
+  <div class="card-head"><h2 id="inT">Gear data</h2><span class="units">inch · stub tooth herringbone, addendum 0.8/DPT</span></div>
+  <form id="form" autocomplete="off">
+    <div class="field"><label for="N">NG or NP <small>(number of teeth)</small></label><div class="inp"><input id="N" inputmode="numeric"></div></div>
+    <div class="field"><label for="DPT">DPT <small>(transverse diametral pitch)</small></label><div class="inp"><input id="DPT" inputmode="decimal"></div></div>
+    <div class="field"><label for="PAT">PAT <small>(transverse pressure angle)</small></label><div class="inp"><input id="PAT" inputmode="decimal"><span class="u">deg</span></div></div>
+    <div class="field"><label for="HA">HA <small>(helix angle)</small></label><div class="inp"><input id="HA" inputmode="decimal"><span class="u">deg</span></div></div>
+    <div class="field"><label for="OD">ODG or ODP <small>(outside diameter)</small></label><div class="inp"><input id="OD" inputmode="decimal"><span class="u">in</span></div></div>
+    <div class="field"><label for="CA">CA <small>(chordal addendum)</small></label><div class="inp"><input id="CA" inputmode="decimal"><span class="u">in</span></div></div>
+    <div class="field"><label for="CTmin">CT min <small>(minimum chordal thickness)</small></label><div class="inp"><input id="CTmin" inputmode="decimal"><span class="u">in</span></div></div>
+    <div class="field"><label for="CTmax">CT max <small>(maximum chordal thickness)</small></label><div class="inp"><input id="CTmax" inputmode="decimal"><span class="u">in</span></div></div>
+    <div class="field"><label for="spanN">Span over <small>(teeth)</small></label><div class="inp"><input id="spanN" inputmode="numeric"></div></div>
+    <div class="field"><label for="spanList">Also show spans over <small>(comma list)</small></label><div class="inp"><input id="spanList"></div></div>
+    <div class="err" id="err"></div>
+    <div class="actions"><button type="submit" class="btn btn-primary">Calculate</button>
+      <button type="button" class="btn btn-ghost" id="btnExample">Load example</button></div>
+  </form>
+</section>
+<section class="card" aria-labelledby="rT">
+  <div class="card-head"><h2 id="rT">Results</h2></div>
+  <div id="out"><p class="empty">Enter gear data and press Calculate.</p></div>
+</section>
+</main>
+<footer class="site-footer">Original app by Roger Blake (R.C. Blake Company, program “B&amp;S to Span &amp; CR”, rev. 25 Aug 08). Browser version by Ram-Gear Manufacturing Inc.</footer>
+<script src="calc.js"></script>
+<script>
+const F=['N','DPT','PAT','HA','OD','CA','CTmin','CTmax','spanN'];
+const f=(x,d)=>Number.isFinite(x)?x.toFixed(d):'—';
+function load(o){F.forEach(k=>document.getElementById(k).value=o[k]);document.getElementById('spanList').value=o.spanList.join(', ');}
+function run(e){e&&e.preventDefault();const err=document.getElementById('err');err.textContent='';
+ const inp={};for(const k of F){const v=parseFloat(document.getElementById(k).value);if(!Number.isFinite(v)||v<=0){err.textContent='Enter a positive number for '+k+'.';return;}inp[k]=v;}
+ if(inp.CTmin>inp.CTmax){err.textContent='CT min must not exceed CT max.';return;}
+ inp.spanList=document.getElementById('spanList').value.split(/[ ,;]+/).map(Number).filter(n=>n>1);
+ const r=SpanCR.calc(inp);
+ const row=(a,b,c,d)=>'<tr><td>'+a+'</td><td class="num">'+b+'</td><td class="num">'+c+'</td></tr>';
+ let h='<table class="results"><thead><tr><th>Item</th><th class="num">MAX</th><th class="num">MIN</th></tr></thead><tbody>';
+ h+=row('<b>Span over '+r.spanMain.n+' teeth</b>','<span class="big">'+f(r.spanMain.max,4)+'</span>','<span class="big">'+f(r.spanMain.min,4)+'</span>');
+ h+=row('<b>Comparator reading (CR)</b>','<span class="big">'+f(r.crMax,4)+'</span>','<span class="big">'+f(r.crMin,4)+'</span>');
+ r.spans.forEach(s=>h+=row('Span over '+s.n+' teeth',f(s.max,4),f(s.min,4)));
+ h+='</tbody></table><table class="results"><tbody>';
+ const one=(a,b)=>'<tr><td>'+a+'</td><td class="num">'+b+'</td></tr>';
+ h+=one('Theoretical number of teeth to span',f(r.E49,8)+' (≈ '+Math.round(r.E49)+')');
+ h+=one('Minimum face width to span '+r.spanMain.n+' teeth',f(r.faceWidth,3));
+ h+='</tbody></table><h3>CRs based on</h3><table class="results"><tbody>';
+ h+=one('DPB',inp.DPT)+one('AB (0.8/DPT)',f(r.C37,4))+one('PAB',f(r.C22,1))+one('TB @ AB',f(r.TB,4))+one('OD',f(inp.OD,4));
+ h+='</tbody></table><h3>Working values</h3><table class="results"><thead><tr><th>Item</th><th class="num">MAX CT</th><th class="num">MIN CT</th></tr></thead><tbody>';
+ h+=row("D' at B&amp;S T",f(r.J.r37,5),f(r.I.r37,5))+row("CTTN at D'",f(r.J.r42,6),f(r.I.r42,6))+row('h',f(r.J.r39,8),f(r.I.r39,8))+row('Angle a (deg)',f(r.J.r41,8),f(r.I.r41,8))+row("HA at D'",f(r.J.r48,8),f(r.I.r48,8))+row("CTTT at D'",f(r.J.r50,8),f(r.I.r50,8))+row("PA at D'",f(r.J.r51,8),f(r.I.r51,8))+row('CTTT at BD',f(r.J.r54,8),f(r.I.r54,8))+row('CTTT at PD',f(r.J.r55,8),f(r.I.r55,8))+row('CTTN at BD',f(r.J.r57,8),f(r.I.r57,8))+row('X',f(r.J.r58,8),f(r.I.r58,8));
+ h+='</tbody></table><table class="results"><tbody>'+one('PD',f(r.C38,6))+one('BD',f(r.C39,6))+one('PAN (normal PA)',f(r.C22,7))+one('BPN (normal base pitch)',f(r.C23,7))+one('BPT',f(r.C43,7))+one('BHA (base helix)',f(r.C55,6))+"</tbody></table>";
+ document.getElementById('out').innerHTML=h;}
+document.getElementById('form').addEventListener('submit',run);
+document.getElementById('btnExample').onclick=()=>{load(SpanCR.EXAMPLE);run();};
+load(SpanCR.EXAMPLE);run();
+</script>
+</body></html>
