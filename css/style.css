@@ -7,7 +7,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 .site-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
-  padding:.8rem 1.4rem;background:linear-gradient(90deg,var(--steel),#1c2631);color:#fff;border-bottom:4px solid var(--brand)}
+  padding:.8rem 1.4rem;background:var(--ok);color:#fff;border-bottom:4px solid #1b4f2b}
 .brand{display:flex;align-items:center;gap:.9rem}
 .logo{width:46px;height:46px;border-radius:6px;background:var(--brand);color:#fff;display:grid;place-items:center;
   font-weight:800;letter-spacing:.5px;font-size:1.1rem;border:2px solid var(--accent)}
