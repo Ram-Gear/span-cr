@@ -126,3 +126,4 @@ table.results td.num,table.results th.num{text-align:right;font-family:var(--mon
 .practice details{margin-top:.4rem}
 .flag{color:var(--warn);font-size:.85rem}
 .help-main{max-width:900px;margin:0 auto;padding:1rem 1.4rem}
+.glossary dt{margin-top:.5rem}.glossary dd{margin:0 0 0 1rem;color:var(--muted)}
