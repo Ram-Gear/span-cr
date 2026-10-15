@@ -6,6 +6,7 @@
 <header class="site-header"><div class="brand"><img class="app-icon" src="icon.svg" width="46" height="46" alt="Span CR icon">
 <div><div class="company">Ram-Gear Manufacturing Inc.</div><h1>Span CR <span class="sub">Help &amp; practice</span></h1></div></div>
 <nav class="header-actions"><a class="btn" href="index.html">Back to app</a></nav></header>
+<div class="print-only print-head"><div class="ptitle">Span CR – Help &amp; Practice</div><div class="pmeta">Ram-Gear Manufacturing Inc. · Printed <span class="pdate"></span> · Original app by Roger Blake</div></div>
 <main class="help-main">
 <p><a href="#glossary">Glossary of abbreviations</a></p>
 <section class="card" id="video"><h2>Watch how it works</h2>
@@ -41,4 +42,5 @@
 <p class="flag">This app reproduces the spreadsheet cell-for-cell, including its rounded constants (π = 3.141592654). One quirk is kept on purpose: the MAX-thickness "CTTT at BD" divides by the MIN-thickness D' (cell J54 uses I37). The effect is ~2×10⁻⁸ in., far below display precision.</p></section>
 </main>
 <footer class="site-footer">Original app by Roger Blake (R.C. Blake Company). Browser version by Ram-Gear Manufacturing Inc.</footer>
+<script>(function(){const s=()=>document.querySelectorAll(".pdate").forEach(e=>e.textContent=new Date().toLocaleString());s();addEventListener("beforeprint",s);addEventListener("beforeprint",()=>document.querySelectorAll("details:not([open])").forEach(d=>{d.open=true;d.dataset.po=1}));addEventListener("afterprint",()=>document.querySelectorAll("details[data-po]").forEach(d=>{d.open=false;delete d.dataset.po}));})();</script>
 </body></html>

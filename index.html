@@ -14,6 +14,7 @@
     <a class="btn btn-ghost" id="btnHelp" href="https://grok.com/?q=I%27m%20using%20Ram-Gear%27s%20Span%20CR%20app%2C%20a%20browser%20rebuild%20of%20Roger%20Blake%27s%20spreadsheet%20that%20converts%20chordal%20addendum%20and%20chordal%20thickness%20%28B%26S%20gear%20tooth%20caliper%20readings%29%20to%20span%20measurement%20over%20N%20teeth%20and%20comparator%20reading%20%28CR%29%20for%20stub%20tooth%20herringbone%20gears%20or%20pinions%20with%20basic%20addendum%200.8/DPT.%20Can%20you%20give%20me%20pointers%20on%20how%20to%20use%20it%3F" target="_blank" rel="noopener" title="Ask Grok how to use Span CR (opens in a new tab)">Help</a>
   </nav>
 </header>
+<div class="print-only print-head"><div class="ptitle">Span CR – Chordal Addendum &amp; Thickness to Span &amp; Comparator Reading</div><div class="pmeta">Ram-Gear Manufacturing Inc. · Printed <span class="pdate"></span> · Original app by Roger Blake</div></div>
 <main class="layout">
 <section class="card" aria-labelledby="inT">
   <div class="card-head"><h2 id="inT">Gear data</h2><span class="units">inch · stub tooth herringbone, addendum 0.8/DPT</span></div>
@@ -68,4 +69,5 @@ document.getElementById('form').addEventListener('submit',run);
 document.getElementById('btnExample').onclick=()=>{load(SpanCR.EXAMPLE);run();};
 load(SpanCR.EXAMPLE);run();
 </script>
+<script>(function(){const s=()=>document.querySelectorAll(".pdate").forEach(e=>e.textContent=new Date().toLocaleString());s();addEventListener("beforeprint",s);})();</script>
 </body></html>
