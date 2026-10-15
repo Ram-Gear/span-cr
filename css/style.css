@@ -116,7 +116,7 @@ table.results{width:100%;border-collapse:collapse}
 a.btn{text-decoration:none;display:inline-block}
 .app-icon{width:46px;height:46px;border-radius:10px;display:block;flex:none}
 /* Span CR additions */
-.app-icon{border-radius:6px;background:#fff}
+.app-icon{border-radius:8px;background:transparent}
 .big{font-family:var(--mono);font-size:1.15rem;font-weight:700}
 table.results{width:100%;border-collapse:collapse}
 table.results th,table.results td{padding:.3rem .5rem;border-bottom:1px solid var(--line);text-align:left}
