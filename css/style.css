@@ -19,6 +19,7 @@ h3{font-size:1rem}
 .layout{display:grid;grid-template-columns:minmax(330px,440px) 1fr;gap:1.1rem;padding:1.1rem 1.4rem;max-width:1400px;margin:0 auto}
 #tools,#docs{grid-column:1 / -1}
 .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1rem 1.1rem;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.card{border-top:5px solid #2E7386;border-radius:6px}
 .card-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--brand);padding-bottom:.45rem;margin-bottom:.8rem}
 .units{font-size:.85rem;color:var(--muted)}
 .units select{margin-left:.3rem}
