@@ -4,6 +4,6 @@ Browser version of Roger Blake's spreadsheet **"B&S to Span & CR"** (rev. 25 Aug
 
 - `index.html` – the app · `help.html` – help & practice · `calc.js` – calculation engine (cell-for-cell port)
 - `test.js` – `node test.js` checks 62 cells against the spreadsheet's cached values
-- `img/icon.svg` – placeholder icon (replace with the final icon; also add `img/icon-64.png`)
+- `icon.svg`, `icon.png`, `favicon.*`, `apple-touch-icon.png` – app icon
 
 Original app by Roger Blake.
